@@ -11,9 +11,8 @@
 
 **Une liste de caractéristiques :**
 
-- Modulaire : L’application est composée de petits modules autonomes, chacun gérant une fonction précise.
+- Modulaire : L’application est composée de modules autonomes, chacun gérant une fonction précise.
 - Indépendance : Chaque module peut être développé, mis à jour et déployé sans affecter les autres.
-- Accessibilité : Les modules communiquent entre eux via des interfaces simples, souvent des API.
 - Déploiement facilité : On peut déployer ou mettre à jour un module sans arrêter toute l’application.
 - Résilience : Si un module tombe en panne, les autres continuent de fonctionner normalement.
 
@@ -26,4 +25,5 @@
 
 https://www.redhat.com/fr/topics/microservices/what-are-microservices 
 https://www.talend.com/fr/resources/guide-microservices/ 
+
 
