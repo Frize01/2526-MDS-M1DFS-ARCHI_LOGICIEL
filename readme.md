@@ -2,7 +2,7 @@
 
 Définition ???
 
-- monolithique => 1 seul gros projet (MVC),
+- ✅ monolithique => 1 seul gros projet (MVC),
 - micro-services => authentification (SSO),
 - Event-Driven => Winform,
 - Hexa => optimisation séparation des responsabilités, code métier, etc...
