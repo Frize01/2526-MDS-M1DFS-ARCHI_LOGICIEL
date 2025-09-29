@@ -13,6 +13,7 @@ Définition ???
 ## Définitions
 - rigidité
 - scalabilité
+- overengineering
 
 ## Architecture Monolithique
 
@@ -34,6 +35,31 @@ C’est le modèle historique le plus utilisé, bien qu’aujourd’hui il soit 
 - **Rigidité** : ajout de nouvelles fonctionnalités limité et coûteux.  
 - **Organisation exigeante** : nécessite une gestion de projet stricte et structurée.  
 
+## Architecture Microservices
+
+Une application en **microservices** est composée de plusieurs petits services autonomes qui communiquent entre eux via des interfaces légères (souvent des API).  
+Chaque **microservice** correspond à une capacité métier spécifique.
+
+### Caractéristiques
+- Chaque microservice est **indépendant** : il peut être développé dans un langage différent.  
+- Cycles de développement plus courts, mises à jour plus rapides et agiles.  
+- Favorise la **scalabilité** : chaque microservice peut évoluer séparément.  
+- En cas de panne, seul le microservice concerné est impacté, le reste continue de fonctionner.  
+- Chaque microservice peut avoir sa propre **architecture** et son propre mode de fonctionnement.  
+
+### Avantages
+- Meilleure agilité pour développer et déployer rapidement.  
+- Scalabilité accrue.  
+- Risque réduit de panne globale : défaillance isolée à un service.  
+- Simplification de la gestion de projet : chaque microservice peut avoir sa propre équipe et organisation.  
+
+### Inconvénients
+- **Sécurité** : plus de communication via API = plus de failles potentielles et plus d’exposition.  
+- **Gestion des données** complexe :  
+    - risque de redondance,  
+    - dépendance entre microservices,  
+    - analyse plus compliquée (provenance des données).  
+- **Coûts d’infrastructure variables** : peut être plus cher ou moins cher selon les cas.  
 
 
 
