@@ -82,7 +82,28 @@ Les services réagissent en fonction des événements qu’ils reçoivent.
 
 ## Architecture Hexagonale
 
+Quand est-ce qu'on doit la mettre en place ?
 
+- quand on sait l'appli va évoluer et que la logique va être complexe
+- Pour un projet assez volumineux
+
+
+A quoi ca sert ?
+
+- pouvoir changer de technologie facilement
+- séparer les responsabilités
+- isoler la logique métier qui limite ses dépendances
+- faciliter les tests unitaires
+- permet de se concentrer sur le code métier plutôt que sur les environnements extérieurs
+
+3 grandes parties : 
+- business logic (métier)
+- client side (visible par l'utilisateur)
+- server side (base de données, API, etc...)
+
+il y a des ports et des adaptateurs => ils font le lien entre les 3 grandes parties.
+- port : pas de contexte - comme une implémentation d'interface 
+- adaptateur : traduit le contenu en fonction du port ?
 
 
 
