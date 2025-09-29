@@ -3,12 +3,13 @@
 
 **Exemples concrets**
 
-E-commerce :
-- Événement : "Nouvelle commande reçue" -> Réactions :Envoyer un email au client
+- E-commerce :
+  - Événement : "Nouvelle commande reçue" -> Réactions :Envoyer un email au client
 
-Applications de messagerie :
-- Événement : "Nouveau message reçu" -> Réactions : Notifier l’utilisateur
+- Applications de messagerie :
+  - Événement : "Nouveau message reçu" -> Réactions : Notifier l’utilisateur
 
 **Avantage**
 Flexibilité : On peut changer ou ajouter des composants facilement.
+
 
