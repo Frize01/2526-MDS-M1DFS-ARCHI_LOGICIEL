@@ -1,4 +1,4 @@
-Définition : un seul projet qui contient toutes les fonctionnalités
+Définition : Un modèle de développement logiciel qui utilise une base de code unique pour éxécuter plusieurs fonctions métiers
 
 Caractéristiques principales :
 - Tout-en-un
@@ -19,3 +19,4 @@ Inconvénients :
 Exemples : 
 - WordPress
 - Django avec templates
+
