@@ -1,5 +1,32 @@
 <?php
 
+
+abstract class Base {
+    abstract public function getDate(): string;
+    abstract public function setDate(string $date): void;
+
+    public function afficherBonjour(): void {
+        echo "bonjour";
+    }
+}
+
+class Animal extends Base {
+    private string $date;
+
+    public function getDate(): string {
+        // formattage ici
+        return $this->date;
+    }
+
+    public function setDate(string $date): void {
+        $this->date = $date;
+    }
+}
+
+
+
+
+
 interface Meuble {
     public function sasseoir();
 }
