@@ -3,17 +3,18 @@
 Définition ???
 
 - ✅ monolithique => 1 seul gros projet (MVC),
-- micro-services => authentification (SSO),
+- ✅ micro-services => authentification (SSO),
 - Event-Driven => Winform,
 - Hexa => optimisation séparation des responsabilités, code métier, etc...
 
 - serverless ?
 - client-serveur ?
+- sockets
 
 ## Définitions
-- rigidité
-- scalabilité
-- overengineering
+- **rigidité** : Capacité d’un système à s’adapter aux changements.
+- **scalabilité** : Capacité d’un système à gérer une augmentation de la charge de travail en ajoutant des ressources.
+- **overengineering** : Complexité excessive dans la conception d’un système, souvent inutile.
 
 ## Architecture Monolithique
 
@@ -34,6 +35,7 @@ C’est le modèle historique le plus utilisé, bien qu’aujourd’hui il soit 
 - **Scalabilité difficile** : gestion complexe des ressources.  
 - **Rigidité** : ajout de nouvelles fonctionnalités limité et coûteux.  
 - **Organisation exigeante** : nécessite une gestion de projet stricte et structurée.  
+- **Découplage** : Le fait de réduire les dépendances entre les différents "services".
 
 ## Architecture Microservices
 
@@ -60,6 +62,26 @@ Chaque **microservice** correspond à une capacité métier spécifique.
     - dépendance entre microservices,  
     - analyse plus compliquée (provenance des données).  
 - **Coûts d’infrastructure variables** : peut être plus cher ou moins cher selon les cas.  
+
+## Architecture Event-Driven
+
+Dans une architecture **événementielle**, une notification est envoyée à tous les services lorsqu’une modification se produit.  
+Les services réagissent en fonction des événements qu’ils reçoivent.
+
+### Types d’événements
+- **Émetteurs** : génèrent des événements.  
+- **Canaux** : transmettent les événements.  
+- **Consommateurs** : réagissent aux événements.  
+
+### Caractéristiques
+- Flexible et simple d’ajouter de nouveaux émetteurs ou consommateurs.  
+- Peut être mis en place dans n’importe quel langage.  
+- Plusieurs sources d’événements possibles (utilisateur, système, capteur, etc.).  
+- Fonctionnement **asynchrone** : il peut y avoir un délai entre l’émission et le traitement.  
+- Scalabilité facilitée grâce au **découplage** des services.  
+
+## Architecture Hexagonale
+
 
 
 
