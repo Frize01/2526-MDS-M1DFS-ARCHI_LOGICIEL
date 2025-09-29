@@ -9,3 +9,6 @@ E-commerce :
 Applications de messagerie :
 - Événement : "Nouveau message reçu" -> Réactions : Notifier l’utilisateur
 
+**Avantage**
+Flexibilité : On peut changer ou ajouter des composants facilement.
+
