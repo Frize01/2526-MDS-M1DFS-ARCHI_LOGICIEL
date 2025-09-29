@@ -3,7 +3,7 @@
 Définition ???
 
 - ✅ monolithique => 1 seul gros projet (MVC),
-- micro-services => authentification (SSO),
+- ✅ micro-services => authentification (SSO),
 - Event-Driven => Winform,
 - Hexa => optimisation séparation des responsabilités, code métier, etc...
 
@@ -11,9 +11,9 @@ Définition ???
 - client-serveur ?
 
 ## Définitions
-- rigidité
-- scalabilité
-- overengineering
+- **rigidité** : Capacité d’un système à s’adapter aux changements.
+- **scalabilité** : Capacité d’un système à gérer une augmentation de la charge de travail en ajoutant des ressources.
+- **overengineering** : Complexité excessive dans la conception d’un système, souvent inutile.
 
 ## Architecture Monolithique
 
