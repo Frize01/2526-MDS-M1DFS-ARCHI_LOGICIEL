@@ -1,4 +1,4 @@
-## **Mircro-service : **
+## **Mircro-service :**
 
 **Definition** : L’architecture microservice est une façon de concevoir une application comme un ensemble de services modulaires. Chacun étant responsable d’une fonction précise
 
@@ -24,6 +24,7 @@
 
 https://www.redhat.com/fr/topics/microservices/what-are-microservices 
 https://www.talend.com/fr/resources/guide-microservices/ 
+
 
 
 
