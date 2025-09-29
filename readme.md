@@ -4,7 +4,7 @@ Définition ???
 
 - ✅ monolithique => 1 seul gros projet (MVC),
 - ✅ micro-services => authentification (SSO),
-- Event-Driven => Winform,
+- ✅ Event-Driven => Winform,
 - Hexa => optimisation séparation des responsabilités, code métier, etc...
 
 - serverless ?
@@ -104,12 +104,6 @@ A quoi ca sert ?
 il y a des ports et des adaptateurs => ils font le lien entre les 3 grandes parties.
 - port : pas de contexte - comme une implémentation d'interface 
 - adaptateur : traduit le contenu en fonction du port ?
-
-
-
-
-
-
 
 
 
