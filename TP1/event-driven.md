@@ -1,3 +1,5 @@
+##Event-driven Architecture
+
 **Definition** : Une architecture Event-Driven (ou orientée événements) est un style d’architecture où les actions se produisent en réponse à des événements.
 
 
@@ -18,6 +20,7 @@
 
 https://www.redhat.com/fr/topics/integration/what-is-event-driven-architecture 
 https://www.bob-le-developpeur.com/notions/event-driven-architecture 
+
 
 
 
