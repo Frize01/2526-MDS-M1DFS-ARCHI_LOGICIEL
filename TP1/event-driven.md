@@ -10,6 +10,15 @@
   - Événement : "Nouveau message reçu" -> Réactions : Notifier l’utilisateur
 
 **Avantage**
-Flexibilité : On peut changer ou ajouter des composants facilement.
+- Flexibilité : On peut changer ou ajouter des composants facilement.
+- Scalabilité : Il est plus facile de scaler un système EDA Event-Driven (Architecture) car on peut ajouter des consommateurs sans perturber les producteurs, et vice versa.
+- Réactivité : Les systèmes basés sur des événements sont très réactifs et peuvent traiter les changements en temps réel.
+
+**Source**
+
+https://www.redhat.com/fr/topics/integration/what-is-event-driven-architecture 
+https://www.bob-le-developpeur.com/notions/event-driven-architecture 
+
+
 
 
