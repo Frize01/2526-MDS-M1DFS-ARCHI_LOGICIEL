@@ -14,6 +14,8 @@ Définition ???
 ## Définitions
 - **rigidité** : Capacité d’un système à s’adapter aux changements.
 - **scalabilité** : Capacité d’un système à gérer une augmentation de la charge de travail en ajoutant des ressources.
+    - **scalabilité horizontale** : 
+    - **scalabilité verticale** : 
 - **overengineering** : Complexité excessive dans la conception d’un système, souvent inutile.
 
 ## Architecture Monolithique
@@ -87,7 +89,6 @@ Quand est-ce qu'on doit la mettre en place ?
 - quand on sait l'appli va évoluer et que la logique va être complexe
 - Pour un projet assez volumineux
 
-
 A quoi ca sert ?
 
 - pouvoir changer de technologie facilement
@@ -111,7 +112,7 @@ il y a des ports et des adaptateurs => ils font le lien entre les 3 grandes part
 
 
 
-# TP 1 :
+# TP 1 : (En groupe)
 
 Faire des recherches sur chacun des 4 types d'architecture cités plus haut. Pour chacun récupérer : 
 
@@ -120,3 +121,56 @@ Faire des recherches sur chacun des 4 types d'architecture cités plus haut. Pou
 - Des exemples d'implémentation (schémas ?)
 - Des exemples d'utilisation dans des projets connus
 - La liste des sources (liens web) où vous avez trouvé les informations
+
+# TP 2 : (En individuel)
+
+A rendre au format PDF - par MP sur Teams
+
+Pour chacune des 4 architectures, vous devez réaliser un schéma complet et clair, montrant :
+
+- Les différents composants de l’architecture
+- Les relations entre ces composants
+- Les serveurs ou environnements d’hébergement utilisés
+- Le chemin parcouru par une requête simple : "Un utilisateur consulte la liste des événements"
+
+**Note** : Vous devrez ajouter toutes les définitions et explications de termes explicites pour que tout le monde puisse parfaitement comprendre chaque type d'architecture. Utilisez VOS mots, pas ceux de chatGPT !
+
+## Détails attendus par architecture
+
+### 1. Architecture Monolithique
+
+Votre schéma doit au minimum représenter :
+
+- Un seul serveur hébergeant toute l’application
+- Un accès à une base de données
+- Le chemin de la requête utilisateur
+
+### 2. Architecture Microservices
+
+Votre schéma doit représenter :
+
+- Plusieurs serveurs ou conteneurs
+- Un service Auth
+- Un service Events
+- Une API Gateway
+- Les communications entre services
+
+### 3. Architecture Event-Driven
+
+Votre schéma doit représenter :
+
+- Les émetteurs d’événements
+- Le bus d’événements
+- Les consommateurs
+- Les serveurs ou conteneurs impliqués
+
+### 4. Architecture Hexagonale
+
+Votre schéma doit représenter :
+
+- Le Domain au centre
+- Les Ports
+- Les Adaptateurs
+- Les ressources externes (BDD, API, etc.)
+- Le ou les serveurs hébergeant ces éléments
+
