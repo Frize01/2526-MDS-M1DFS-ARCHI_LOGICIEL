@@ -112,7 +112,7 @@ il y a des ports et des adaptateurs => ils font le lien entre les 3 grandes part
 
 
 
-# TP 1 :
+# TP 1 : (En groupe)
 
 Faire des recherches sur chacun des 4 types d'architecture cités plus haut. Pour chacun récupérer : 
 
@@ -122,7 +122,9 @@ Faire des recherches sur chacun des 4 types d'architecture cités plus haut. Pou
 - Des exemples d'utilisation dans des projets connus
 - La liste des sources (liens web) où vous avez trouvé les informations
 
-# TP 2 :
+# TP 2 : (En individuel)
+
+A rendre au format PDF - par MP sur Teams
 
 Pour chacune des 4 architectures, vous devez réaliser un schéma complet et clair, montrant :
 
@@ -171,3 +173,4 @@ Votre schéma doit représenter :
 - Les Adaptateurs
 - Les ressources externes (BDD, API, etc.)
 - Le ou les serveurs hébergeant ces éléments
+
