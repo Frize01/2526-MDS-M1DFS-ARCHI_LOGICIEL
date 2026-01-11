@@ -135,6 +135,8 @@ Pour chacune des 4 architectures, vous devez réaliser un schéma complet et cla
 
 **Note** : Vous devrez ajouter toutes les définitions et explications de termes explicites pour que tout le monde puisse parfaitement comprendre chaque type d'architecture. Utilisez VOS mots, pas ceux de chatGPT !
 
+DEADLINE : prochain jour de cours sur ce sujet, avant 9h le matin, reçu par DM sur Teams ! (uniquement les 3 premiers schémas, pas le hexa, mais ultra détaillé !)
+
 ## Détails attendus par architecture
 
 ### 1. Architecture Monolithique
@@ -174,3 +176,26 @@ Votre schéma doit représenter :
 - Les ressources externes (BDD, API, etc.)
 - Le ou les serveurs hébergeant ces éléments
 
+# TP 3 : 
+
+Vous devez étudier comment un même projet pourrait être conçu selon 4 architectures différentes.
+
+Le projet commun est le suivant : Mini système de gestion d’événements.
+
+Le système doit permettre :
+
+- L’inscription d’un utilisateur
+- La connexion d’un utilisateur
+- La création d’un événement (titre, description, date)
+- Le listing des événements publics
+- La consultation d’un événement
+
+Vous ne devez pas coder. Tout le travail porte sur la conception et la représentation graphique.
+
+Pour chacune des 4 architectures suivantes : Monolithique, Microservices, Event-Driven, Hexagonale,
+vous devez produire les éléments suivants :
+
+- Un schéma synthétique représentant : les composants principaux, leurs interactions, la structure globale du système
+- Une explication sur comment le projet serait structuré dans cette architecture (séparation en modules, séparation en services, séparation en couches, ports et adaptateurs, event bus, etc.). Vous devez y mettre au minimum : où se trouvent l’inscription et la connexion, où se trouvent les événements, comment les composants communiquent entre eux, et comment on gère la donnée.
+- Pour chaque fonctionnalité du projet, expliquer en quelques phrases : comment elle s’exécute dans cette architecture, quels composants sont impliqués, dans quel ordre. (Pas de code, seulement une description fonctionnelle et technique simplifiée.)
+- Expliquez les avantages et inconvénients pour ce projet précisément : quels sont les avantages, quels sont les inconvénients, qu’est-ce qui serait facile, qu’est-ce qui serait difficile. N'oubliez pas de bien tout contextualiser.
