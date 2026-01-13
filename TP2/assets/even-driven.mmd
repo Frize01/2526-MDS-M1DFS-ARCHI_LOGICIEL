@@ -1,0 +1,14 @@
+graph LR
+U[Utilisateur]
+Producer[Service Events]
+Bus[(Event Bus / Broker)]
+Consumer1[Service Notifications]
+Consumer2[Service SearchIndex]
+EventsDB[(Events DB)]
+
+U -->|POST /events| Producer
+Producer -->|publish: EventCreated| Bus
+Bus --> Consumer1
+Bus --> Consumer2
+Consumer2 -->|update index| EventsDB
+Producer -->|ack & response 201| U

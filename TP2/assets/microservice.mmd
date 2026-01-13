@@ -1,0 +1,15 @@
+graph LR
+U[Utilisateur]
+GW[API Gateway]
+Auth[Service Auth]
+Events[Service Events]
+UserDB[(Auth DB)]
+EventsDB[(Events DB)]
+
+U -->|Requête /events| GW
+GW -->|vérifie token| Auth
+GW --> Events
+Events --> EventsDB
+Auth --> UserDB
+Events -->|réponse| GW
+GW --> U

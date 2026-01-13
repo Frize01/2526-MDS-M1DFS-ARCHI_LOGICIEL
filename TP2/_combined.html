@@ -1,0 +1,289 @@
+<!doctype html><meta charset="utf-8"><h1>TP2 - Architectures</h1>
+<hr>
+<h1>Architecture Monolithique</h1>
+<h2>Définition</h2>
+<p>Une architecture où toute l'application (interface utilisateur, logique métier, accès aux données) est déployée comme un seul bloc.</p>
+<h2>Caractéristiques</h2>
+<ul>
+<li>Un seul artefact déployable</li>
+<li>Fort couplage entre composants</li>
+<li>Déploiement et monitoring centralisés</li>
+<li>Scalabilité par réplication complète (scale-out) ou scale-up</li>
+</ul>
+<h2>Schéma (Mermaid)</h2>
+<p><img src="assets/monolithique.svg" alt=""></p>
+<h2>Chemin: « Un utilisateur consulte la liste des événements »</h2>
+<ol>
+<li>L'utilisateur envoie une requête HTTP GET <code>/events</code> vers le serveur.</li>
+<li>Le monolithe reçoit la requête, exécute la logique métier pour récupérer les événements.</li>
+<li>La couche persistence interroge la base de données et renvoie les données.</li>
+<li>Le monolithe formate la réponse (JSON/HTML) et la renvoie à l'utilisateur.</li>
+</ol>
+<h2>Avantages / Inconvénients (pour le mini-système d'événements)</h2>
+<ul>
+<li>Avantages : simplicité de développement et de déploiement, faible overhead opérationnel pour un petit projet.</li>
+<li>Inconvénients : évolutivité limitée, risque de régression globale lors d'un changement, déploiement moins flexible.</li>
+</ul>
+<h2>Exemples d'utilisation</h2>
+<ul>
+<li>MVP, prototypes, petites applications internes.</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>Notes de cours et documentation d'architecture (divers cours d'architecture logicielle).</li>
+</ul>
+<h2>Structure proposée pour le mini-système</h2>
+<ul>
+<li><code>controllers/</code> : routes HTTP et contrôleurs</li>
+<li><code>services/</code> : logique métier (inscription, connexion, events)</li>
+<li><code>repositories/</code> : accès base de données</li>
+<li><code>models/</code> : entités (User, Event)</li>
+</ul>
+<h2>Hébergement et environnement</h2>
+<ul>
+<li>Serveur unique (VM ou instance PaaS like Heroku, Render, Railway)</li>
+<li>Base de données relationnelle (Postgres, MySQL) accessible par le serveur</li>
+<li>Backup et monitoring centralisés</li>
+</ul>
+<h2>Détails fonctionnels (pas à pas)</h2>
+<ol>
+<li>
+<p>Inscription (POST <code>/signup</code>)</p>
+<ul>
+<li>Le contrôleur reçoit la requête, valide les champs.</li>
+<li>Le service <code>User</code> crée l'entité et appelle le repository pour persister.</li>
+<li>La base renvoie un id ; le service renvoie 201 + profil public.</li>
+</ul>
+</li>
+<li>
+<p>Connexion (POST <code>/login</code>)</p>
+<ul>
+<li>Le contrôleur reçoit identifiants.</li>
+<li>Le service <code>Auth</code> vérifie le mot de passe via le repository.</li>
+<li>Si ok, le service émet un token (JWT) ou crée une session côté serveur.</li>
+</ul>
+</li>
+<li>
+<p>Création d'un événement (POST <code>/events</code>)</p>
+<ul>
+<li>Contrôleur vérifie l'authentification.</li>
+<li>Service <code>Events</code> valide et persiste l'événement via repository.</li>
+<li>Réponse 201 avec l'ID de l'événement.</li>
+</ul>
+</li>
+<li>
+<p>Listing des événements publics (GET <code>/events</code>)</p>
+<ul>
+<li>Contrôleur appelle le service <code>Events</code>.</li>
+<li>Service exécute une requête SQL optimisée (pagination, index).</li>
+<li>Résultat retourné en JSON.</li>
+</ul>
+</li>
+<li>
+<p>Consultation d'un événement (GET <code>/events/{id}</code>)</p>
+<ul>
+<li>Contrôleur appelle <code>Events.findById(id)</code>.</li>
+<li>Le repository récupère l'entité, le service applique règles de visibilité et renvoie.</li>
+</ul>
+</li>
+</ol>
+<h2>Considérations opérationnelles</h2>
+<ul>
+<li>Sauvegarde et restauration centralisées (point critique).</li>
+<li>Déploiement : un seul rollback remplace l'app entière.</li>
+<li>Tests : possibilité d'exécuter tests d'intégration sur l'artefact complet.</li>
+</ul>
+<hr>
+<h1>Architecture Microservices</h1>
+<h2>Définition</h2>
+<p>Une architecture composée de plusieurs services autonomes, chacun responsable d'un domaine métier précis et communiquant par des API légères.</p>
+<h2>Caractéristiques</h2>
+<ul>
+<li>Services indépendants, déployables séparément</li>
+<li>Communication via API REST/HTTP ou messages</li>
+<li>Chaque service peut avoir sa propre base de données</li>
+<li>API Gateway possible pour routage, authentification et orchestration</li>
+</ul>
+<h2>Schéma (Mermaid)</h2>
+<p><img src="assets/microservice.svg" alt=""></p>
+<h2>Chemin: « Un utilisateur consulte la liste des événements »</h2>
+<ol>
+<li>L'utilisateur envoie GET <code>/events</code> à l'API Gateway.</li>
+<li>L'API Gateway valide l'authentification (via le Service Auth ou token JWT).</li>
+<li>La Gateway route la requête vers le Service Events.</li>
+<li>Le Service Events interroge sa base de données (EventsDB) et renvoie la liste.</li>
+<li>La Gateway renvoie la réponse au client.</li>
+</ol>
+<h2>Avantages / Inconvénients (pour le mini-système d'événements)</h2>
+<ul>
+<li>Avantages : possibilité de scaler indépendamment le service Events, déploiements ciblés, tolérance aux pannes locales.</li>
+<li>Inconvénients : complexité opérationnelle (orchestration, monitoring), latence réseau, gestion des transactions distribuées.</li>
+</ul>
+<h2>Exemples d'utilisation</h2>
+<ul>
+<li>Grandes applications distribuées, plateformes nécessitant scalabilité granulaire.</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>Notes de cours et documentation microservices.</li>
+</ul>
+<h2>Structure et déploiement</h2>
+<ul>
+<li>Conteneurs/Pods Docker pour chaque service (<code>auth</code>, <code>events</code>, <code>notifications</code>, <code>gateway</code>).</li>
+<li>Orchestration Kubernetes / Docker Compose pour développement.</li>
+<li>Bases de données séparées : <code>auth-db</code>, <code>events-db</code> (chaque service son modèle).</li>
+</ul>
+<h2>Environnements hébergement</h2>
+<ul>
+<li>API Gateway (Load Balancer / Cloud Gateway) en frontal</li>
+<li>Services déployés sur clusters (K8s, ECS) ou fonctions serverless</li>
+<li>Observabilité : centralisé (Prometheus, Grafana, ELK)</li>
+</ul>
+<h2>Flux détaillés par fonctionnalité</h2>
+<ol>
+<li>
+<p>Inscription (POST <code>/signup</code>)</p>
+<ul>
+<li>Requête envoyée à <code>auth</code> via la Gateway.</li>
+<li><code>auth</code> valide et persiste l'utilisateur dans <code>auth-db</code>.</li>
+<li><code>auth</code> peut publier un événement <code>UserCreated</code> (optionnel).</li>
+</ul>
+</li>
+<li>
+<p>Connexion (POST <code>/login</code>)</p>
+<ul>
+<li>Requête vers <code>auth</code> qui valide et renvoie un token JWT.</li>
+<li>Token utilisé pour appels ultérieurs vers <code>events</code> via la Gateway.</li>
+</ul>
+</li>
+<li>
+<p>Création d'un événement (POST <code>/events</code>)</p>
+<ul>
+<li>Client appelle <code>gateway</code> avec token.</li>
+<li>Gateway route vers <code>events</code> service.</li>
+<li><code>events</code> persiste dans <code>events-db</code> et peut publier <code>EventCreated</code> pour autres services.</li>
+</ul>
+</li>
+<li>
+<p>Listing des événements publics (GET <code>/events</code>)</p>
+<ul>
+<li>Client appelle <code>gateway</code>.</li>
+<li>Gateway authentifie (ou pas) et route vers <code>events</code>.</li>
+<li><code>events</code> retourne la liste depuis <code>events-db</code>.</li>
+</ul>
+</li>
+<li>
+<p>Consultation d'un événement (GET <code>/events/{id}</code>)</p>
+<ul>
+<li>Route via Gateway → <code>events.findById(id)</code> → <code>events-db</code> → réponse.</li>
+</ul>
+</li>
+</ol>
+<h2>Cohérence et transactions</h2>
+<ul>
+<li>Transactions limitées au sein d'un service; pour opérations multi-services, utiliser sagas ou event-driven compensations.</li>
+</ul>
+<h2>Avantages / Inconvénients techniques (plus de détails)</h2>
+<ul>
+<li>Observabilité et traçage requis (Distributed Tracing)</li>
+<li>Tests d'intégration plus complexes (mocking de services)</li>
+</ul>
+<hr>
+<h1>Architecture Event-Driven</h1>
+<h2>Définition</h2>
+<p>Une architecture reposant sur des événements : des émetteurs publient des événements sur un bus, et des consommateurs y réagissent de façon asynchrone.</p>
+<h2>Caractéristiques</h2>
+<ul>
+<li>Découplage fort entre producteurs et consommateurs</li>
+<li>Traitement asynchrone et par lots possible</li>
+<li>Bonne extensibilité (ajout de consommateurs)</li>
+<li>Nécessite un bus (RabbitMQ, Kafka, etc.) ou broker</li>
+</ul>
+<h2>Schéma (Mermaid)</h2>
+<p><img src="assets/even-driven.svg" alt=""></p>
+<h2>Chemin: « Un utilisateur consulte la liste des événements »</h2>
+<p>Cas synchronisé (lecture):</p>
+<ol>
+<li>L'utilisateur envoie GET <code>/events</code> au Service Events (ou via API Gateway).</li>
+<li>Le Service Events interroge sa base de données EventsDB et retourne la liste.</li>
+</ol>
+<p>Cas création (exemple d'émission d'événement):</p>
+<ol>
+<li>L'utilisateur crée un événement via POST <code>/events</code>.</li>
+<li>Le Service Events persiste l'événement puis publie <code>EventCreated</code> sur le bus.</li>
+<li>Les consommateurs (Notifications, SearchIndex, Analytics) reçoivent l'événement et effectuent leurs traitements (envoi d'email, mise à jour d'index, etc.).</li>
+</ol>
+<h2>Avantages / Inconvénients</h2>
+<ul>
+<li>Avantages : découplage, scalabilité et flexibilité pour ajouter des fonctionnalités asynchrones.</li>
+<li>Inconvénients : complexité (gestion du broker, garantie d'acheminement), debugging plus difficile, latence pour traitements asynchrones.</li>
+</ul>
+<h2>Exemples d'utilisation</h2>
+<ul>
+<li>Systèmes nécessitant notifications en temps différé, pipelines de traitement, analytics.</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>Documentation sur architectures événementielles (Kafka, RabbitMQ, articles de patterns).</li>
+</ul>
+<h2>Structure et composants</h2>
+<ul>
+<li>Broker / Event Bus (Kafka, RabbitMQ, AWS SNS/SQS)</li>
+<li>Producteur principal : <code>events</code> service</li>
+<li>Consommateurs : <code>notifications</code>, <code>search-index</code>, <code>analytics</code>, <code>read-model-updater</code></li>
+<li>Read-model (index optimisé pour lecture) mis à jour par consommateurs</li>
+</ul>
+<h2>Hébergement</h2>
+<ul>
+<li>Broker sur cluster dédié (managed Kafka, RabbitMQ cluster) ou service cloud</li>
+<li>Consumers et producers déployés en conteneurs/Pods</li>
+<li>Read-model servi par un service HTTP pour lectures rapides</li>
+</ul>
+<h2>Flux détaillés par fonctionnalité</h2>
+<ol>
+<li>
+<p>Inscription (POST <code>/signup</code>)</p>
+<ul>
+<li><code>auth</code> persiste l'utilisateur puis publie <code>UserCreated</code>.</li>
+<li>Un consommateur <code>welcome-email</code> reçoit l'événement et envoie mail.</li>
+</ul>
+</li>
+<li>
+<p>Connexion (POST <code>/login</code>)</p>
+<ul>
+<li>Auth reste synchrone : vérification et émission de token JWT.</li>
+</ul>
+</li>
+<li>
+<p>Création d'un événement (POST <code>/events</code>)</p>
+<ul>
+<li><code>events</code> service persiste l'événement puis publie <code>EventCreated</code>.</li>
+<li>Consumer <code>read-model-updater</code> met à jour l'index de lecture.</li>
+<li>Consumer <code>notifications</code> notifie abonnés si nécessaire.</li>
+</ul>
+</li>
+<li>
+<p>Listing des événements publics (GET <code>/events</code>)</p>
+<ul>
+<li>Lecture sur le <code>read-model</code> (fast path) : pas besoin d'interroger le broker.</li>
+<li>Si pas d'index, service <code>events</code> sert depuis sa propre DB (synchronisation éventuelle).</li>
+</ul>
+</li>
+<li>
+<p>Consultation d'un événement (GET <code>/events/{id}</code>)</p>
+<ul>
+<li>Lecture depuis read-model ou <code>events</code> service selon SLA de fraîcheur.</li>
+</ul>
+</li>
+</ol>
+<h2>Garanties et gestion des erreurs</h2>
+<ul>
+<li>At-least-once delivery vs exactly-once : choix selon broker et idempotence des consumers.</li>
+<li>Idempotence requise pour consumers (ex: updates d'index).</li>
+<li>Stratégies de retry, DLQ (dead-letter queue) pour messages non traitables.</li>
+</ul>
+<h2>Avantages / Inconvénients détaillés</h2>
+<ul>
+<li>Avantages : excellente extensibilité pour features asynchrones, découplage, ajout de nouvelles reactions sans changer producers.</li>
+<li>Inconvénients : complexité opérationnelle (broker), latence pour traitements consommateurs, difficulté de debug end-to-end.</li>
+</ul>

@@ -1,0 +1,27 @@
+{
+  "name": "2526-mds-m1dfs-archi_logiciel",
+  "version": "1.0.0",
+  "description": "Définition ???",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frize01/2526-MDS-M1DFS-ARCHI_LOGICIEL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Frize01/2526-MDS-M1DFS-ARCHI_LOGICIEL/issues"
+  },
+  "homepage": "https://github.com/Frize01/2526-MDS-M1DFS-ARCHI_LOGICIEL#readme",
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.12.0",
+    "fs-extra": "^11.3.3",
+    "markdown-it": "^14.1.0",
+    "puppeteer": "^23.11.1"
+  }
+}

@@ -1,0 +1,8 @@
+graph LR
+User[User]
+Monolith[Monolith]
+DB[(DB)]
+User -->|GET /events| Monolith
+Monolith -->|SELECT * FROM events| DB
+DB --> Monolith
+Monolith -->|200 JSON| User

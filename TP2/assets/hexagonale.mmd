@@ -1,0 +1,17 @@
+graph LR
+subgraph App
+  Domain[Domain (Core)]
+  PortAPI[(Port: Application/UseCases)]
+  PortRepo[(Port: Repository)]
+end
+AdapterHTTP[Adapter HTTP / Controller]
+AdapterDB[Adapter DB (SQL / ORM)]
+ExternalDB[(Base de données)]
+User[Utilisateur]
+
+User --> AdapterHTTP
+AdapterHTTP --> PortAPI
+PortAPI --> Domain
+Domain --> PortRepo
+PortRepo --> AdapterDB
+AdapterDB --> ExternalDB
